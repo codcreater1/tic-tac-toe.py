@@ -1,5 +1,4 @@
 
-
 import tkinter as tk
 from itertools import cycle
 from tkinter import font
