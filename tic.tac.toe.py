@@ -52,14 +52,14 @@ class TicTacToeGame:
         return rows + columns + [first_diagonal, second_diagonal]
 
     def is_valid_move(self, move):
-        """Return True if move is valid, and False otherwise."""
+        print("Return True if move is valid, and False otherwise.")
         row, col = move.row, move.col
         move_was_not_played = self._current_moves[row][col].label == ""
         no_winner = not self._has_winner
         return no_winner and move_was_not_played
 
     def process_move(self, move):
-        """Process the current move and check if it's a win."""
+        print("Process the current move and check if it's a win.")
         row, col = move.row, move.col
         self._current_moves[row][col] = move
         for combo in self._winning_combos:
@@ -71,11 +71,11 @@ class TicTacToeGame:
                 break
 
     def has_winner(self):
-        """Return True if the game has a winner, and False otherwise."""
+        print("Return True if the game has a winner, and False otherwise.")
         return self._has_winner
 
     def is_tied(self):
-        """Return True if the game is tied, and False otherwise."""
+        print("Return True if the game is tied, and False otherwise.")
         no_winner = not self._has_winner
         played_moves = (
             move.label for row in self._current_moves for move in row
@@ -83,11 +83,11 @@ class TicTacToeGame:
         return no_winner and all(played_moves)
 
     def toggle_player(self):
-        """Return a toggled player."""
+        print("Return a toggled player.")
         self.current_player = next(self._players)
 
     def reset_game(self):
-        """Reset the game state to play again."""
+        print("Reset the game state to play again.")
         for row, row_content in enumerate(self._current_moves):
             for col, _ in enumerate(row_content):
                 row_content[col] = Move(row, col)
@@ -138,7 +138,7 @@ class TicTacToeBoard(tk.Tk):
                     fg="black",
                     width=3,
                     height=2,
-                    highlightbackground="lightblue",
+                    highlightbackground="Green",
                 )
                 self._cells[button] = (row, col)
                 button.bind("<ButtonPress-1>", self.play)
@@ -168,21 +168,21 @@ class TicTacToeBoard(tk.Tk):
         clicked_btn.config(text=self._game.current_player.label)
         clicked_btn.config(fg=self._game.current_player.color)
 
-    def _update_display(self, msg, color="black"):
+    def _update_display(self, msg, color="Purple"):
         self.display["text"] = msg
         self.display["fg"] = color
 
     def _highlight_cells(self):
         for button, coordinates in self._cells.items():
             if coordinates in self._game.winner_combo:
-                button.config(highlightbackground="red")
+                button.config(highlightbackground="yellow")
 
     def reset_board(self):
         """Reset the game's board to play again."""
         self._game.reset_game()
         self._update_display(msg="Ready?")
         for button in self._cells.keys():
-            button.config(highlightbackground="lightblue")
+            button.config(highlightbackground="Green")
             button.config(text="")
             button.config(fg="black")
 
