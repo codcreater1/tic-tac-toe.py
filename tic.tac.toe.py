@@ -74,8 +74,8 @@ class TicTacToeGame:
         print("Return True if the game has a winner, and False otherwise.")
         return self._has_winner
 
-    def is_tied(self):
-        print("Return True if the game is tied, and False otherwise.")
+    def is_draw(self):
+        print("Return True if the game is draw, and False otherwise.")
         no_winner = not self._has_winner
         played_moves = (
             move.label for row in self._current_moves for move in row
