@@ -74,7 +74,7 @@ class TicTacToeGame:
         print("Return True if the game has a winner, and False otherwise.")
         return self._has_winner
 
-    def is_draw(self):
+    def is_tied(self):
         print("Return True if the game is draw, and False otherwise.")
         no_winner = not self._has_winner
         played_moves = (
@@ -153,7 +153,7 @@ class TicTacToeBoard(tk.Tk):
             self._update_button(clicked_btn)
             self._game.process_move(move)
             if self._game.is_tied():
-                self._update_display(msg="Tied game!", color="red")
+                self._update_display(msg="Draw game!", color="red")
             elif self._game.has_winner():
                 self._highlight_cells()
                 msg = f'Player "{self._game.current_player.label}" won!'
